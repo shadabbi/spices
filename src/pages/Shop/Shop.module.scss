@@ -1,0 +1,28 @@
+
+.shop {
+     header {
+        &.bg {
+           height: 50vh;
+           background-position: center;
+           background-size: cover;
+        }
+     }
+
+     main {
+         display: flex;
+     }
+
+     .results {
+        height: 100px;
+     }
+
+     .categories {
+      width: 30%;
+   }
+
+   .items {
+      display: flex;
+      flex-wrap: wrap;
+      // justify-content: space-between;
+   }
+}
