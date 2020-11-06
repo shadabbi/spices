@@ -9,7 +9,7 @@ import Cart from './pages/cart/Cart'
 import Shop from './pages/Shop/Shop'
 import Sign from './pages/Sign/Sign'
 import CreateNew from './pages/Sign/CreateNew'
-import {auth} from './firebase/firebase'
+import {auth, createUserProfile} from './firebase/firebase'
 import {setUser} from './redux/user/action'
 import User from './pages/user/user'
 
@@ -18,10 +18,10 @@ class App extends Component {
 
   unSubscribe = null;
   componentDidMount() {
-    this.unSubscribe =  auth.onAuthStateChanged(user=>{
-      console.log('call')
-      console.log(user)
-      this.props.dispatch(setUser(user))
+    this.unSubscribe =  auth.onAuthStateChanged( async user=>{
+   
+      createUserProfile(user)
+       this.props.dispatch(setUser(user))
     })
   }
 
@@ -37,6 +37,7 @@ class App extends Component {
         <Header />
         <Switch>
             <Route path='/' exact component={Home}></Route>
+            <Route path='/shop' exact component={Home}></Route>
             <Route path='/cart' exact component={Cart}></Route>
             <Route path='/user' exact component={User}></Route>
             <Route path='/Sign' exact render={()=>user?<Redirect to='/'/>:<Sign/>}></Route>

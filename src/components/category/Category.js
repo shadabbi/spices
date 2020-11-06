@@ -14,10 +14,12 @@ const category = (props) => {
                 props.history.push(`/${props.urlPara}`)
            } else if(props.addToCart) {
                 props.dispatch(addToCart(props.item))
+                props.history.push(`/cart`)
            }
 
            return
         }}>
+            <div className={classes.overlay}></div>
             <div className={classes.bg}>
                 <img src={props.imgUrl}></img>
             </div>

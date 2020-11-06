@@ -4,7 +4,8 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom'
 
 import classes from './Shop.module.scss';
-import Category from '../../components/category/Category'
+import Category from '../../components/category/Category';
+import CategoryList from '../../components/categoryList/CategoryList';
 
 
 
@@ -21,7 +22,7 @@ const shop = (props) => {
             <main>
 
                 <div className={classes.categories}>
-
+                        <CategoryList/>
                 </div>
 
                 <div className={classes.items}>
@@ -41,3 +42,4 @@ const mapStateToProps = state => ({
 })
 
 export default withRouter(connect(mapStateToProps)(shop));
+

@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 
 import 'firebase/auth';
-import 'firebase/database';
+import 'firebase/firebase-firestore';
 
   const firebaseConfig = {
     apiKey: "AIzaSyBh2tG1mm66tUuXXfAEhEV9b0uZul7FMeQ",
@@ -16,7 +16,38 @@ import 'firebase/database';
 
   firebase.initializeApp(firebaseConfig);
 
+export const createUserProfile = async (auth, additionalData) => {
+
+  if(!auth) return;
+
+  const userRef = firestore.collection("users").doc(auth.uid);
+
+  const snapshot = await userRef.get();
+  
+  if(!snapshot.exists) {
+
+      const {displayName, email} = auth;
+      const createdAt = new Date();
+
+      try {
+       await userRef.set({
+          displayName,
+          email,
+          createdAt,
+          ...additionalData
+         });
+
+      } catch (error) {
+        console.log('error')
+      }
+  }
+
+  return userRef;
+
+}
+
 export const auth = firebase.auth();
+export const firestore = firebase.firestore();
 
   const provider = new firebase.auth.GoogleAuthProvider();
   const providerFacebook = new firebase.auth.FacebookAuthProvider();

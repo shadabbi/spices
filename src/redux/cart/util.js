@@ -15,7 +15,7 @@ export const inc = (items, newItem) => {
         return items.map(item=>item.id===match.id?{...match, quantity:match.quantity+1}:item)
     }
 
-    return [...items, newItem]
+    return [newItem, ...items]
 
 }
 export const dec = (items, newItem) => {
